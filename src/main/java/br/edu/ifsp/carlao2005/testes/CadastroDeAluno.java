@@ -8,6 +8,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -44,11 +45,14 @@ public class CadastroDeAluno {
 
          */
 
-        // teste find
+
+        // testes
 
         EntityManager em = JPAUtil.getEntityManager();
-
         AlunoDao dao = new AlunoDao(em);
+
+        /*
+        // teste find
 
         Aluno a = dao.buscarPorId(3l);
 
@@ -71,8 +75,33 @@ public class CadastroDeAluno {
             a.setNota3(new BigDecimal("6.5"));
             a.setRa("SC10003");
             em.getTransaction().commit();
-            */
+
         }
+
+        */
+
+        // teste listar todos
+
+        List<Aluno> todos = dao.buscarTodos();
+
+        if(todos.isEmpty()){
+            System.out.println("Nenhum aluno cadastrado!");
+
+        } else {
+            for(Aluno a : todos) {
+                System.out.println("----------------------------");
+                System.out.println(a.getNome());
+                System.out.println(a.getRa());
+                System.out.println(a.getEmail());
+                System.out.println(a.getNota1());
+                System.out.println(a.getNota2());
+                System.out.println(a.getNota3());
+            }
+
+        }
+
+
+
 
 
 
