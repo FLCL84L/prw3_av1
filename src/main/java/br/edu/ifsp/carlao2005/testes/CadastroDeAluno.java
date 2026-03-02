@@ -5,6 +5,7 @@ import br.edu.ifsp.carlao2005.modelo.Aluno;
 import br.edu.ifsp.carlao2005.util.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
 
 import java.math.BigDecimal;
@@ -80,6 +81,7 @@ public class CadastroDeAluno {
 
         */
 
+        /*
         // teste listar todos
 
         List<Aluno> todos = dao.buscarTodos();
@@ -99,6 +101,47 @@ public class CadastroDeAluno {
             }
 
         }
+         */
+
+        /*
+        // teste filtrar por parametro
+
+        List<Aluno> todos = dao.buscarPorNome("Joao");
+
+        if(todos.isEmpty()){
+            System.out.println("Aluno não encontrado!");
+
+        } else {
+            for(Aluno a : todos) {
+                System.out.println("----------------------------");
+                System.out.println(a.getNome());
+                System.out.println(a.getRa());
+                System.out.println(a.getEmail());
+                System.out.println(a.getNota1());
+                System.out.println(a.getNota2());
+                System.out.println(a.getNota3());
+            }
+
+        }
+
+         */
+
+        // teste filtrar por parametro single result
+
+        try {
+            Aluno a = dao.buscarUnicoPorNome("Maria");
+
+            System.out.println("Nome: "+a.getNome());
+            System.out.println("Email: "+a.getEmail());
+            System.out.println("RA: "+a.getRa());
+            System.out.println("Notas: "+a.getNota1()+" - "+a.getNota2()+" - "+a.getNota3());
+
+        } catch (NoResultException e) {
+            System.out.println("\nAluno não encontrado!");
+        }
+
+
+
 
 
 
@@ -132,20 +175,6 @@ public class CadastroDeAluno {
         em.close();
 
         */
-
-
-
-
-
-
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        
     }
 }

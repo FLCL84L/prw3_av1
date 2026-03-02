@@ -2,6 +2,7 @@ package br.edu.ifsp.carlao2005.dao;
 
 import br.edu.ifsp.carlao2005.modelo.Aluno;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 
 import java.util.List;
 
@@ -24,4 +25,16 @@ public class AlunoDao {
         String jpql = "SELECT a FROM Aluno a";
         return em.createQuery(jpql, Aluno.class).getResultList();
     }
+
+    public List<Aluno> buscarPorNome(String nome) {
+        String jpql = "SELECT a FROM Aluno a WHERE a.nome = :n";
+        return em.createQuery(jpql, Aluno.class).setParameter("n", nome).getResultList();
+    }
+
+    public Aluno buscarUnicoPorNome(String nome) throws NoResultException {
+        String jpql = "SELECT a FROM Aluno a WHERE a.nome = :n";
+        return em.createQuery(jpql, Aluno.class).setParameter("n", nome).getSingleResult();
+    }
+
+
 }
