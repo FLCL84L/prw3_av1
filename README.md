@@ -7,4 +7,4 @@ Programação para a WEB III
 #### Hibernate™ • • • H2 Database Engine™
 
 ## Descrição
-Sistema simples de persistencia de dados com Java com uma tabela Alunos para classe Alunos com funções que alteram o Banco de Dados Criando, Excluindo Alterando, Consultando e Listando todos Alunos com status de aprovação dependendo da média do Aluno.
+Sistema simples de persistência de dados em Java contendo uma tabela Alunos para classe Alunos com funções que alteram o Banco de Dados Criando, Excluindo Alterando, Consultando e Listando todos Alunos com status de aprovação dependendo da média do Aluno.
