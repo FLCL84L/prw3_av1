@@ -42,11 +42,11 @@ public class CadastroDeAluno {
             System.out.print("\nDigite a opção desejada: ");
 
             opcao = leitorTeclado.nextInt();
-            // leitura para consumir o new line do int opcao:
-            leitorTeclado.nextLine();
 
             if(opcao == 1){
                 System.out.println("\nCADASTRO DE ALUNO:");
+                // leitura para consumir o new line do int opcao:
+                leitorTeclado.nextLine();
                 System.out.print("Digite o nome: ");
                 String nome = leitorTeclado.nextLine();
                 System.out.print("Digite o RA: ");
@@ -70,7 +70,9 @@ public class CadastroDeAluno {
 
             } else if(opcao == 2) {
                 System.out.println("\nEXCLUIR ALUNO:");
-                System.out.print("\nDigite o nome: ");
+                // leitura para consumir o new line do int opcao:
+                leitorTeclado.nextLine();
+                System.out.print("Digite o nome: ");
                 String nome = leitorTeclado.nextLine();
 
                 try {
@@ -82,12 +84,58 @@ public class CadastroDeAluno {
 
                     em.getTransaction().commit();
 
+                    System.out.println("\nAluno removido com sucesso!");
+
                 } catch (NoResultException e) {
                     System.out.println("\nAluno não encontrado!");
                 }
 
             }else if(opcao == 3) {
-                System.out.println("\nOPÇÃO 3");
+                System.out.println("\nALTERAR ALUNO:");
+                // leitura para consumir o new line do int opcao:
+                leitorTeclado.nextLine();
+                System.out.print("Digite o nome: ");
+                String nome = leitorTeclado.nextLine();
+
+                try {
+                    Aluno a = dao.buscarUnicoPorNome(nome);
+
+                    System.out.println("Dados do aluno: ");
+                    System.out.println("Nome: "+a.getNome());
+                    System.out.println("Email: "+a.getEmail());
+                    System.out.println("RA: "+a.getRa());
+                    System.out.println("Notas: "+a.getNota1()+" - "+a.getNota2()+" - "+a.getNota3());
+
+                    System.out.println("\nNOVOS DADOS: ");
+                    System.out.print("Digite o nome: ");
+                    String nomeNovo = leitorTeclado.nextLine();
+                    System.out.print("Digite o RA: ");
+                    String ra = leitorTeclado.nextLine();
+                    System.out.print("Digite o email: ");
+                    String email = leitorTeclado.nextLine();
+                    System.out.print("Digite a nota 1: ");
+                    BigDecimal nota1 = leitorTeclado.nextBigDecimal();
+                    System.out.print("Digite a nota 2: ");
+                    BigDecimal nota2 = leitorTeclado.nextBigDecimal();
+                    System.out.print("Digite a nota 3: ");
+                    BigDecimal nota3 = leitorTeclado.nextBigDecimal();
+
+                    em.getTransaction().begin();
+
+                    a.setNome(nomeNovo);
+                    a.setRa(ra);
+                    a.setEmail(email);
+                    a.setNota1(nota1);
+                    a.setNota2(nota2);
+                    a.setNota3(nota3);
+
+                    em.getTransaction().commit();
+
+                    System.out.println("\nAluno alterado com sucesso!");
+
+                } catch (NoResultException e) {
+                    System.out.println("\nAluno não encontrado!");
+                }
 
             }else if(opcao == 4) {
                 System.out.println("\nOPÇÃO 4");
@@ -103,7 +151,7 @@ public class CadastroDeAluno {
                     System.out.println("Exibindo todos os alunos:");
                     for(Aluno a : todos) {
 
-                        System.out.println("Nome: "+a.getNome());
+                        System.out.println("\nNome: "+a.getNome());
                         System.out.println("Email: "+a.getEmail());
                         System.out.println("RA: "+a.getRa());
                         System.out.println("Notas: "+a.getNota1()+" - "+a.getNota2()+" - "+a.getNota3());
