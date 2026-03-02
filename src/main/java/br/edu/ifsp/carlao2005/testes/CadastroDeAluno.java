@@ -50,7 +50,7 @@ public class CadastroDeAluno {
 
         AlunoDao dao = new AlunoDao(em);
 
-        Aluno a = dao.buscarPorId(4l);
+        Aluno a = dao.buscarPorId(3l);
 
         if(a == null){
             System.out.println("Aluno não encontrado!");
@@ -61,6 +61,17 @@ public class CadastroDeAluno {
             System.out.println(a.getNota1());
             System.out.println(a.getNota2());
             System.out.println(a.getNota3());
+
+            /*
+            em.getTransaction().begin();
+            a.setNome("Paulo");
+            a.setEmail("paulo@gmail.com");
+            a.setNota1(new BigDecimal("1.5"));
+            a.setNota2(new BigDecimal("3.5"));
+            a.setNota3(new BigDecimal("6.5"));
+            a.setRa("SC10003");
+            em.getTransaction().commit();
+            */
         }
 
 
