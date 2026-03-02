@@ -8,12 +8,68 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.math.BigDecimal;
+import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class CadastroDeAluno {
     public static void main(String[] args) {
 
+
+
+        // menu projeto
+        /*
+        int opcao = 0;
+
+        // Leitor
+        Scanner leitorTeclado = new Scanner(System.in);
+        // menu
+
+        while(opcao != 6) {
+
+            System.out.println("\n** CADASTRO DE ALUNOS **");
+            System.out.println("1 - Cadastrar Aluno");
+            System.out.println("2 - Excluir Aluno");
+            System.out.println("3 - Alterar Aluno");
+            System.out.println("4 - Buscar aluno pelo nome");
+            System.out.println("5 - Listar alunos (com status de aprovação)");
+            System.out.println("6 - FIM");
+            System.out.print("\nDigite a opção desejada: ");
+
+            opcao = leitorTeclado.nextInt();
+
+            System.out.println("OPCAO SELECIONADA: " + opcao);
+
+        }
+
+         */
+
+        // teste find
+
+        EntityManager em = JPAUtil.getEntityManager();
+
+        AlunoDao dao = new AlunoDao(em);
+
+        Aluno a = dao.buscarPorId(4l);
+
+        if(a == null){
+            System.out.println("Aluno não encontrado!");
+        } else {
+            System.out.println(a.getNome());
+            System.out.println(a.getRa());
+            System.out.println(a.getEmail());
+            System.out.println(a.getNota1());
+            System.out.println(a.getNota2());
+            System.out.println(a.getNota3());
+        }
+
+
+
+
+
+
+
+        /*
 
         Aluno aluno1 = new Aluno();
         aluno1.setNome("Maria");
@@ -35,6 +91,7 @@ public class CadastroDeAluno {
 
         em.close();
 
+        */
 
 
 
