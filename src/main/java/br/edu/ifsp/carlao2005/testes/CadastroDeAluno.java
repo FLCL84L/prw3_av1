@@ -138,7 +138,24 @@ public class CadastroDeAluno {
                 }
 
             }else if(opcao == 4) {
-                System.out.println("\nOPÇÃO 4");
+                System.out.println("\nCONSULTAR ALUNO:");
+                // leitura para consumir o new line do int opcao:
+                leitorTeclado.nextLine();
+                System.out.print("Digite o nome: ");
+                String nome = leitorTeclado.nextLine();
+
+                try {
+                    Aluno a = dao.buscarUnicoPorNome(nome);
+
+                    System.out.println("Dados do aluno: ");
+                    System.out.println("Nome: "+a.getNome());
+                    System.out.println("Email: "+a.getEmail());
+                    System.out.println("RA: "+a.getRa());
+                    System.out.println("Notas: "+a.getNota1()+" - "+a.getNota2()+" - "+a.getNota3());
+
+                } catch (NoResultException e) {
+                    System.out.println("\nAluno não encontrado!");
+                }
 
             }else if(opcao == 5) {
                 List<Aluno> todos = dao.buscarTodos();
@@ -147,16 +164,16 @@ public class CadastroDeAluno {
                     System.out.println("Nenhum aluno cadastrado!");
 
                 } else {
-
                     System.out.println("Exibindo todos os alunos:");
-                    for(Aluno a : todos) {
 
+                    for(Aluno a : todos) {
                         System.out.println("\nNome: "+a.getNome());
                         System.out.println("Email: "+a.getEmail());
                         System.out.println("RA: "+a.getRa());
                         System.out.println("Notas: "+a.getNota1()+" - "+a.getNota2()+" - "+a.getNota3());
+                        System.out.printf("Media: %.2f\n", a.getMedia());
+                        System.out.println("Situação: "+a.getAprovacao());
                     }
-
                 }
 
             }else if(opcao == 6) {
@@ -165,160 +182,7 @@ public class CadastroDeAluno {
                 em.close();
             }else {
                 System.out.println("\nOPÇÃO INVÁLIDA!");
-
             }
-
         }
-
-
-
-
-        // testes
-
-        /*
-        // teste find
-
-        Aluno a = dao.buscarPorId(3l);
-
-        if(a == null){
-            System.out.println("Aluno não encontrado!");
-        } else {
-            System.out.println(a.getNome());
-            System.out.println(a.getRa());
-            System.out.println(a.getEmail());
-            System.out.println(a.getNota1());
-            System.out.println(a.getNota2());
-            System.out.println(a.getNota3());
-
-            /*
-            em.getTransaction().begin();
-            a.setNome("Paulo");
-            a.setEmail("paulo@gmail.com");
-            a.setNota1(new BigDecimal("1.5"));
-            a.setNota2(new BigDecimal("3.5"));
-            a.setNota3(new BigDecimal("6.5"));
-            a.setRa("SC10003");
-            em.getTransaction().commit();
-
-        }
-
-        */
-
-        /*
-        // teste listar todos
-
-        List<Aluno> todos = dao.buscarTodos();
-
-        if(todos.isEmpty()){
-            System.out.println("Nenhum aluno cadastrado!");
-
-        } else {
-            for(Aluno a : todos) {
-                System.out.println("----------------------------");
-                System.out.println(a.getNome());
-                System.out.println(a.getRa());
-                System.out.println(a.getEmail());
-                System.out.println(a.getNota1());
-                System.out.println(a.getNota2());
-                System.out.println(a.getNota3());
-            }
-
-        }
-         */
-
-        /*
-        // teste filtrar por parametro
-
-        List<Aluno> todos = dao.buscarPorNome("Joao");
-
-        if(todos.isEmpty()){
-            System.out.println("Aluno não encontrado!");
-
-        } else {
-            for(Aluno a : todos) {
-                System.out.println("----------------------------");
-                System.out.println(a.getNome());
-                System.out.println(a.getRa());
-                System.out.println(a.getEmail());
-                System.out.println(a.getNota1());
-                System.out.println(a.getNota2());
-                System.out.println(a.getNota3());
-            }
-
-        }
-
-         */
-
-        /*
-        // teste filtrar por parametro single result
-
-        try {
-            Aluno a = dao.buscarUnicoPorNome("Maria");
-
-            System.out.println("Nome: "+a.getNome());
-            System.out.println("Email: "+a.getEmail());
-            System.out.println("RA: "+a.getRa());
-            System.out.println("Notas: "+a.getNota1()+" - "+a.getNota2()+" - "+a.getNota3());
-
-        } catch (NoResultException e) {
-            System.out.println("\nAluno não encontrado!");
-        }
-
-         */
-
-        /*
-        // teste deletar aluno
-        try {
-            Aluno a = dao.buscarUnicoPorNome("Maria");
-
-            em.getTransaction().begin();
-            em.remove(a);
-            em.getTransaction().commit();
-            em.close();
-
-        } catch (NoResultException e) {
-            System.out.println("\nAluno não encontrado!");
-        }
-
-
-         */
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-
-        Aluno aluno1 = new Aluno();
-        aluno1.setNome("Maria");
-        aluno1.setRa("SC10002");
-        aluno1.setNota1(new BigDecimal("8"));
-        aluno1.setNota2(new BigDecimal("9"));
-        aluno1.setNota3(new BigDecimal("10"));
-        aluno1.setEmail("maria@gmail.com");
-
-        EntityManager em = JPAUtil.getEntityManager();
-
-        AlunoDao dao = new AlunoDao(em);
-
-        em.getTransaction().begin();
-
-        em.persist(aluno1);
-
-        em.getTransaction().commit();
-
-        em.close();
-
-        */
-
-
     }
 }

@@ -2,6 +2,7 @@ package br.edu.ifsp.carlao2005.modelo;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Entity
 @Table(name = "alunos")
@@ -47,4 +48,21 @@ public class Aluno {
     public void setNota2(BigDecimal nota2) { this.nota2 = nota2; }
     public BigDecimal getNota3() { return nota3; }
     public void setNota3(BigDecimal nota3) { this.nota3 = nota3; }
+    public double getMedia() {
+        double n1 = nota1.doubleValue();
+        double n2 = nota2.doubleValue();
+        double n3 = nota3.doubleValue();
+        return (n1+n2+n3)/3;
+    }
+    public String getAprovacao() {
+        double m = getMedia();
+        if(m < 4.0){
+            return "Reprovado";
+        }else if(m < 6.0){
+            return "Recuperação";
+        }else {
+            return "Aprovado";
+        }
+    }
+
 }
