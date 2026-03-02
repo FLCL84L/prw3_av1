@@ -1,5 +1,8 @@
-package br.edu.ifsp.carlao2005;
+package br.edu.ifsp.carlao2005.testes;
 
+import br.edu.ifsp.carlao2005.dao.AlunoDao;
+import br.edu.ifsp.carlao2005.modelo.Aluno;
+import br.edu.ifsp.carlao2005.util.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -8,20 +11,21 @@ import java.math.BigDecimal;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
+public class CadastroDeAluno {
     public static void main(String[] args) {
 
 
         Aluno aluno1 = new Aluno();
-        aluno1.setNome("João");
-        aluno1.setRa("SC10001");
-        aluno1.setNota1(new BigDecimal("6"));
-        aluno1.setNota2(new BigDecimal("7"));
-        aluno1.setNota3(new BigDecimal("8"));
+        aluno1.setNome("Maria");
+        aluno1.setRa("SC10002");
+        aluno1.setNota1(new BigDecimal("8"));
+        aluno1.setNota2(new BigDecimal("9"));
+        aluno1.setNota3(new BigDecimal("10"));
+        aluno1.setEmail("maria@gmail.com");
 
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("escola");
+        EntityManager em = JPAUtil.getEntityManager();
 
-        EntityManager em = factory.createEntityManager();
+        AlunoDao dao = new AlunoDao(em);
 
         em.getTransaction().begin();
 

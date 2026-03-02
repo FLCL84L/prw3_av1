@@ -1,4 +1,4 @@
-package br.edu.ifsp.carlao2005;
+package br.edu.ifsp.carlao2005.modelo;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
