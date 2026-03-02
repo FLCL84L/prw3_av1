@@ -32,30 +32,32 @@ public class CadastroDeAluno {
         // menu
         int opcao = 0;
         while(opcao != 6) {
-            System.out.println("\n** CADASTRO DE ALUNOS **");
-            System.out.println("1 - Cadastrar Aluno");
-            System.out.println("2 - Excluir Aluno");
-            System.out.println("3 - Alterar Aluno");
+            System.out.println("\n** CADASTRO DE ALUNOS **\n");
+            System.out.println("1 - Cadastrar aluno");
+            System.out.println("2 - Excluir aluno");
+            System.out.println("3 - Alterar aluno");
             System.out.println("4 - Buscar aluno pelo nome");
             System.out.println("5 - Listar alunos (com status de aprovação)");
             System.out.println("6 - FIM");
             System.out.print("\nDigite a opção desejada: ");
 
             opcao = leitorTeclado.nextInt();
+            // leitura para consumir o new line do int opcao:
+            leitorTeclado.nextLine();
 
             if(opcao == 1){
                 System.out.println("\nCADASTRO DE ALUNO:");
-                System.out.print("\nDigite o nome: ");
+                System.out.print("Digite o nome: ");
                 String nome = leitorTeclado.nextLine();
-                System.out.print("\nDigite o RA: ");
+                System.out.print("Digite o RA: ");
                 String ra = leitorTeclado.nextLine();
-                System.out.print("\nDigite o email: ");
+                System.out.print("Digite o email: ");
                 String email = leitorTeclado.nextLine();
-                System.out.print("\nDigite a nota 1: ");
+                System.out.print("Digite a nota 1: ");
                 BigDecimal nota1 = leitorTeclado.nextBigDecimal();
-                System.out.print("\nDigite a nota 2: ");
+                System.out.print("Digite a nota 2: ");
                 BigDecimal nota2 = leitorTeclado.nextBigDecimal();
-                System.out.print("\nDigite a nota 3: ");
+                System.out.print("Digite a nota 3: ");
                 BigDecimal nota3 = leitorTeclado.nextBigDecimal();
 
                 Aluno a = new Aluno(nome, ra, email, nota1, nota2, nota3);
@@ -66,7 +68,6 @@ public class CadastroDeAluno {
 
                 em.getTransaction().commit();
 
-                em.close();
             } else if(opcao == 2) {
                 System.out.println("\nEXCLUIR ALUNO:");
                 System.out.print("\nDigite o nome: ");
@@ -81,16 +82,41 @@ public class CadastroDeAluno {
 
                     em.getTransaction().commit();
 
-                    em.close();
-
-                    System.out.println("Nome: "+a.getNome());
-                    System.out.println("Email: "+a.getEmail());
-                    System.out.println("RA: "+a.getRa());
-                    System.out.println("Notas: "+a.getNota1()+" - "+a.getNota2()+" - "+a.getNota3());
-
                 } catch (NoResultException e) {
                     System.out.println("\nAluno não encontrado!");
                 }
+
+            }else if(opcao == 3) {
+                System.out.println("\nOPÇÃO 3");
+
+            }else if(opcao == 4) {
+                System.out.println("\nOPÇÃO 4");
+
+            }else if(opcao == 5) {
+                List<Aluno> todos = dao.buscarTodos();
+
+                if(todos.isEmpty()){
+                    System.out.println("Nenhum aluno cadastrado!");
+
+                } else {
+
+                    System.out.println("Exibindo todos os alunos:");
+                    for(Aluno a : todos) {
+
+                        System.out.println("Nome: "+a.getNome());
+                        System.out.println("Email: "+a.getEmail());
+                        System.out.println("RA: "+a.getRa());
+                        System.out.println("Notas: "+a.getNota1()+" - "+a.getNota2()+" - "+a.getNota3());
+                    }
+
+                }
+
+            }else if(opcao == 6) {
+                System.out.println("\nEncerrando Programa...");
+
+                em.close();
+            }else {
+                System.out.println("\nOPÇÃO INVÁLIDA!");
 
             }
 
@@ -244,6 +270,7 @@ public class CadastroDeAluno {
         em.close();
 
         */
+
 
     }
 }
