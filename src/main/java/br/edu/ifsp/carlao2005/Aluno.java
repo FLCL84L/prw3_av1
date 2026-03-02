@@ -1,13 +1,13 @@
 package br.edu.ifsp.carlao2005;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "alunos")
 public class Aluno {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String ra;
