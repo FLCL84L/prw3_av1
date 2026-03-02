@@ -1,5 +1,5 @@
 # Avaliação 1  da disciplina PRW3
-# (Programação para a WEB III)
+Programação para a WEB III
 
 ## Tecnologias Utilizadas:
 #### Java™
