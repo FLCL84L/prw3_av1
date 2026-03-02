@@ -17,6 +17,8 @@ public class AlunoDao {
         this.em.persist(aluno);
     }
 
+
+
     public Aluno buscarPorId(Long id) {
         return em.find(Aluno.class, id);
     }

@@ -11,24 +11,27 @@ import jakarta.persistence.Persistence;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class CadastroDeAluno {
     public static void main(String[] args) {
 
+        // desligar mensagens do hibernate
+        java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
 
 
-        // menu projeto
-        /*
-        int opcao = 0;
+        // Entity Manager e Aluno Dao
+        EntityManager em = JPAUtil.getEntityManager();
+        AlunoDao dao = new AlunoDao(em);
 
         // Leitor
         Scanner leitorTeclado = new Scanner(System.in);
+
         // menu
-
+        int opcao = 0;
         while(opcao != 6) {
-
             System.out.println("\n** CADASTRO DE ALUNOS **");
             System.out.println("1 - Cadastrar Aluno");
             System.out.println("2 - Excluir Aluno");
@@ -40,17 +43,63 @@ public class CadastroDeAluno {
 
             opcao = leitorTeclado.nextInt();
 
-            System.out.println("OPCAO SELECIONADA: " + opcao);
+            if(opcao == 1){
+                System.out.println("\nCADASTRO DE ALUNO:");
+                System.out.print("\nDigite o nome: ");
+                String nome = leitorTeclado.nextLine();
+                System.out.print("\nDigite o RA: ");
+                String ra = leitorTeclado.nextLine();
+                System.out.print("\nDigite o email: ");
+                String email = leitorTeclado.nextLine();
+                System.out.print("\nDigite a nota 1: ");
+                BigDecimal nota1 = leitorTeclado.nextBigDecimal();
+                System.out.print("\nDigite a nota 2: ");
+                BigDecimal nota2 = leitorTeclado.nextBigDecimal();
+                System.out.print("\nDigite a nota 3: ");
+                BigDecimal nota3 = leitorTeclado.nextBigDecimal();
+
+                Aluno a = new Aluno(nome, ra, email, nota1, nota2, nota3);
+
+                em.getTransaction().begin();
+
+                em.persist(a);
+
+                em.getTransaction().commit();
+
+                em.close();
+            } else if(opcao == 2) {
+                System.out.println("\nEXCLUIR ALUNO:");
+                System.out.print("\nDigite o nome: ");
+                String nome = leitorTeclado.nextLine();
+
+                try {
+                    Aluno a = dao.buscarUnicoPorNome(nome);
+
+                    em.getTransaction().begin();
+
+                    em.remove(a);
+
+                    em.getTransaction().commit();
+
+                    em.close();
+
+                    System.out.println("Nome: "+a.getNome());
+                    System.out.println("Email: "+a.getEmail());
+                    System.out.println("RA: "+a.getRa());
+                    System.out.println("Notas: "+a.getNota1()+" - "+a.getNota2()+" - "+a.getNota3());
+
+                } catch (NoResultException e) {
+                    System.out.println("\nAluno não encontrado!");
+                }
+
+            }
 
         }
 
-         */
+
 
 
         // testes
-
-        EntityManager em = JPAUtil.getEntityManager();
-        AlunoDao dao = new AlunoDao(em);
 
         /*
         // teste find
@@ -126,6 +175,7 @@ public class CadastroDeAluno {
 
          */
 
+        /*
         // teste filtrar por parametro single result
 
         try {
@@ -139,6 +189,25 @@ public class CadastroDeAluno {
         } catch (NoResultException e) {
             System.out.println("\nAluno não encontrado!");
         }
+
+         */
+
+        /*
+        // teste deletar aluno
+        try {
+            Aluno a = dao.buscarUnicoPorNome("Maria");
+
+            em.getTransaction().begin();
+            em.remove(a);
+            em.getTransaction().commit();
+            em.close();
+
+        } catch (NoResultException e) {
+            System.out.println("\nAluno não encontrado!");
+        }
+
+
+         */
 
 
 
@@ -175,6 +244,6 @@ public class CadastroDeAluno {
         em.close();
 
         */
-        
+
     }
 }
